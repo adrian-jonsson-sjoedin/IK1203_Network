@@ -16,10 +16,13 @@ public class TCPClient {
             clientSocket.getOutputStream().write(toServerBytes); //sends bytes on socket
 
             int flag = 0;
+            int index;
             do {
                 byte[] buffer = new byte[128];
                 flag = clientSocket.getInputStream().read(buffer);
-                fromServer.write(buffer);
+                index = flag;
+                for (int i = 0; i < index - 1; i++)
+                    fromServer.write(buffer[i]);
             } while (flag != -1);
 
         } catch (IOException ex) {
