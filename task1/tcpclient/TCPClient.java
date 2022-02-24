@@ -8,7 +8,6 @@ public class TCPClient {
 
     public TCPClient() {
     }
-
     public byte[] askServer(String hostname, int port, byte[] toServerBytes) throws IOException {
         ByteArrayOutputStream fromServer = new ByteArrayOutputStream();
         try {
@@ -21,15 +20,13 @@ public class TCPClient {
                 byte[] buffer = new byte[128];
                 flag = clientSocket.getInputStream().read(buffer);
                 index = flag;
-                for (int i = 0; i < index - 1; i++)
+                for (int i = 0; i < index; i++)
                     fromServer.write(buffer[i]);
             } while (flag != -1);
 
         } catch (IOException ex) {
             System.out.println("I/O exception " + ex);
         }
-
-
         return fromServer.toByteArray();
     }
 }
